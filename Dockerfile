@@ -4,8 +4,8 @@ MAINTAINER Adam adam@anope.org
 MAINTAINER Sheogorath <sheogorath@shivering-isles.com>
 
 ARG VERSION=2.0
-ARG RUN_DEPENDENCIES=
-ARG BUILD_DEPENDENCIES=
+ARG RUN_DEPENDENCIES=gettext
+ARG BUILD_DEPENDENCIES=gettext
 
 RUN apk add --no-cache --virtual .build-utils gcc g++ make git cmake gnutls-dev sqlite-dev mariadb-dev $BUILD_DEPENDENCIES && \
     apk add --no-cache --virtual .dependencies libgcc libstdc++ gnutls gnutls-utils sqlite-libs mariadb-client-libs $RUN_DEPENDENCIES && \
@@ -20,6 +20,8 @@ RUN apk add --no-cache --virtual .build-utils gcc g++ make git cmake gnutls-dev 
     ln -s /src/anope/modules/extra/m_ssl_gnutls.cpp modules && \
     ln -s /src/anope/modules/extra/m_mysql.cpp modules && \
     ln -s /src/anope/modules/extra/m_sqlite.cpp modules && \
+    ln -s /src/anope/modules/extra/m_sql_authentication.cpp modules && \
+    ln -s /src/anope/modules/extra/stats modules && \
     mkdir build && \
     cd /src/anope/build && \
     cmake -DINSTDIR=/anope/ -DDEFUMASK=077 -DCMAKE_BUILD_TYPE=RELEASE .. && \
